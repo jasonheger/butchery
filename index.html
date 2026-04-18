@@ -3,132 +3,474 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Community Meat Buy – Butchery</title>
+  <title>The Steak Syndicate | Community Meat Buy Planning</title>
+  <meta
+    name="description"
+    content="The Steak Syndicate helps friends plan premium primal buys, understand yields, and reserve interest before purchase."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Community Butchery</h1>
-    <p class="tagline">Organize your meat collective: browse, reserve and learn</p>
-  </header>
-  <main>
-    <section id="intro">
-      <h2>How It Works</h2>
-      <ol>
-        <li>
-          Review the available primal cuts and the steaks and roasts we can produce from each.
-        </li>
-        <li>
-          Reserve your desired portions using our request form (no payment collected here).
-        </li>
-        <li>
-          We’ll consolidate the orders, purchase the appropriate primals and notify everyone of
-          final counts and costs.
-        </li>
-        <li>
-          Pickup and payment will happen locally after the primals are butchered and weighed.
-        </li>
-      </ol>
-    </section>
-    <section id="primal-cuts">
-      <h2>Available Primal Cuts</h2>
-      <p>
-        The following are the sample primals we can source. Actual weight and cost may vary
-        slightly per pack.
-      </p>
-      <table>
-        <thead>
-          <tr>
-            <th>Primal Cut</th>
-            <th>Estimated Weight (lb)</th>
-            <th>Price ($/lb)</th>
-            <th>Estimated Portions</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Whole Prime Brisket</td>
-            <td>23.4</td>
-            <td>5.99</td>
-            <td>12–16 brisket slices &amp; points</td>
-            <td>USDA Prime beef brisket for smoking or braising.</td>
-          </tr>
-          <tr>
-            <td>Whole Choice Brisket</td>
-            <td>14.3</td>
-            <td>5.89</td>
-            <td>8–12 brisket slices &amp; points</td>
-            <td>USDA Choice beef brisket, great for barbecue.</td>
-          </tr>
-          <tr>
-            <td>Top Loin (NY Strip) Prime</td>
-            <td>14.8</td>
-            <td>13.99</td>
-            <td>20–24 steaks</td>
-            <td>Prime grade strip loin for New York strip steaks.</td>
-          </tr>
-          <tr>
-            <td>Top Loin (NY Strip) Choice</td>
-            <td>18.3</td>
-            <td>11.99</td>
-            <td>24–30 steaks</td>
-            <td>Choice grade strip loin.</td>
-          </tr>
-          <tr>
-            <td>Ribeye Roast Prime</td>
-            <td>18.1</td>
-            <td>14.99</td>
-            <td>20–24 steaks</td>
-            <td>Prime boneless ribeye, perfect for ribeye steaks.</td>
-          </tr>
-          <tr>
-            <td>Tenderloin Whole American Wagyu</td>
-            <td>7.2</td>
-            <td>24.19</td>
-            <td>14–18 filet mignon</td>
-            <td>Luxurious American Wagyu tenderloin for filet mignon.</td>
-          </tr>
-          <tr>
-            <td>Chuck Roll</td>
-            <td>25.7</td>
-            <td>6.99</td>
-            <td>10–12 roasts or 24+ chuck steaks</td>
-            <td>Beef chuck roll for chuck roasts or Denver/Chuck Eye steaks.</td>
-          </tr>
-          <tr>
-            <td>Pork Belly (Skinless)</td>
-            <td>11.8</td>
-            <td>3.99</td>
-            <td>8–12 slabs</td>
-            <td>Skinless pork belly for bacon or braising.</td>
-          </tr>
-          <tr>
-            <td>Pork Loin (Boneless)</td>
-            <td>7.7</td>
-            <td>1.99</td>
-            <td>12–16 chops/roasts</td>
-            <td>Boneless pork loin for roasts or chops.</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    <section id="education">
-      <h2>Learn About the Cuts</h2>
-      <p>Not sure which cut is right for you? Check out these resources:</p>
-      <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Cut_of_beef">Cut of beef (Wikipedia)</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Beefsteak">Beefsteak (Wikipedia)</a></li>
-        <li><a href="https://www.beefitswhatsfordinner.com/cuts">Beef Cuts Chart – Beef It’s What’s For Dinner</a></li>
-      </ul>
-    </section>
-  </main>
-  <footer>
-    <p>
-      No payments are processed on this site. We use this page to manage reservations and
-      coordinate group purchases.
-    </p>
-  </footer>
+  <div class="site-shell">
+    <!-- Hero / Navigation -->
+    <header class="hero" id="top">
+      <div class="hero-overlay"></div>
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="#top">
+          <span class="brand-kicker">Private Club Provisioning</span>
+          <span class="brand-name">The Steak Syndicate</span>
+        </a>
+        <div class="nav-links">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#cuts">Available Cuts</a>
+          <a href="#education">Learn</a>
+          <a href="#disclaimer">Disclaimer</a>
+        </div>
+      </nav>
+
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Community Meat Buy | Informational Only</p>
+          <h1>Prime cuts, bourbon-hour atmosphere, and a sharper way to plan the board.</h1>
+          <p class="hero-tagline" id="hero-tagline" aria-live="polite">
+            Where prime steaks meet bourbon and fire.
+          </p>
+          <p class="hero-intro">
+            This site helps friends understand which primals are available, what they typically
+            butcher into, and how to reserve interest before anything is purchased.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#cuts">Review the Cuts</a>
+            <a class="button button-secondary" href="#how-it-works">See How It Works</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal">
+          <p class="panel-label">Syndicate Notes</p>
+          <h2>Built for planning, not checkout.</h2>
+          <ul class="hero-list">
+            <li>Prime-forward lineup with steakhouse staples, barbecue options, and a few pork cuts.</li>
+            <li>Expected yields are shown up front so everyone understands likely steak and roast counts.</li>
+            <li>Reservations happen offline after the group agrees on what is worth bringing in.</li>
+          </ul>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-value">9</span>
+              <span class="stat-label">featured cuts</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">3</span>
+              <span class="stat-label">catalog filters</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">0</span>
+              <span class="stat-label">payments processed</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <!-- Brand positioning -->
+      <section class="section summary reveal" aria-label="Highlights">
+        <article class="summary-card">
+          <p class="summary-kicker">Prime Mindset</p>
+          <h2>Cut for people who care what lands on the board.</h2>
+          <p>
+            From ribeye and strip loin to brisket and chuck, the goal is better group buying
+            decisions with fewer surprises.
+          </p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-kicker">Yield Clarity</p>
+          <h2>Weight, price, portions, and expectations in one place.</h2>
+          <p>
+            Every featured primal includes typical pack weight, estimated cost per pound, and the
+            kind of steaks or roasts that usually come out the other side.
+          </p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-kicker">Reservation Only</p>
+          <h2>No cart. No checkout. No false precision.</h2>
+          <p>
+            This is a planning surface for the group. Final totals depend on the actual primals
+            purchased and how each one trims out in real life.
+          </p>
+        </article>
+      </section>
+
+      <!-- Process section -->
+      <section class="section reveal" id="how-it-works">
+        <div class="section-heading">
+          <p class="eyebrow">How It Works</p>
+          <h2>Reserve interest with the right expectations.</h2>
+          <p>
+            The process stays intentionally simple so the group can focus on the cuts, not on site
+            logistics.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <span class="step-number">01</span>
+            <h3>Review the board</h3>
+            <p>
+              Browse the current primal lineup and compare weight, estimated price, expected
+              portions, and what each cut is best suited for.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step-number">02</span>
+            <h3>Reserve interest</h3>
+            <p>
+              Let the group organizer know which cuts you want in on. This site is for planning and
+              reservations only, not transactions.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step-number">03</span>
+            <h3>Buy the actual primal</h3>
+            <p>
+              Once interest is clear, the right primals are sourced. Final cost depends on the
+              actual weight of the pieces purchased.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step-number">04</span>
+            <h3>Butcher and settle up locally</h3>
+            <p>
+              Final steak counts, roast sizes, and payment happen offline after trimming, portioning,
+              and real-world weights are confirmed.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Catalog section -->
+      <section class="section reveal" id="cuts">
+        <div class="section-heading">
+          <p class="eyebrow">Available Primal Cuts</p>
+          <h2>The current board.</h2>
+          <p>
+            These are sample offerings the group can source. All figures are estimates intended to
+            help set expectations before a purchase is made.
+          </p>
+        </div>
+
+        <div class="catalog-toolbar">
+          <div class="filter-group" aria-label="Catalog filters">
+            <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">
+              All Cuts
+            </button>
+            <button class="filter-chip" type="button" data-filter="steakhouse" aria-pressed="false">
+              Steakhouse
+            </button>
+            <button class="filter-chip" type="button" data-filter="slow-cook" aria-pressed="false">
+              Low and Slow
+            </button>
+            <button class="filter-chip" type="button" data-filter="pork" aria-pressed="false">
+              Pork
+            </button>
+          </div>
+
+          <label class="sort-control" for="sort-cuts">
+            <span>Sort</span>
+            <select id="sort-cuts" name="sort-cuts">
+              <option value="featured">Featured Order</option>
+              <option value="price-high">Highest Price</option>
+              <option value="price-low">Lowest Price</option>
+              <option value="weight-high">Heaviest Weight</option>
+              <option value="weight-low">Lightest Weight</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="cuts-grid" id="cuts-grid">
+          <article class="cut-card" data-category="slow-cook" data-price="5.99" data-weight="23.4" data-featured="1">
+            <p class="cut-type">Low and Slow</p>
+            <h3>Whole Prime Brisket</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>23.4 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$5.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>12 to 16 portions</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              USDA Prime brisket with strong marbling for smoking, braising, or a serious weekend
+              cook.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="slow-cook" data-price="5.89" data-weight="14.3" data-featured="2">
+            <p class="cut-type">Barbecue Staple</p>
+            <h3>Whole Choice Brisket</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>14.3 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$5.89</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>8 to 12 portions</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              A more value-minded brisket option that still delivers excellent barbecue results.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="steakhouse" data-price="13.99" data-weight="14.8" data-featured="3">
+            <p class="cut-type">Steakhouse Favorite</p>
+            <h3>Prime Strip Loin</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>14.8 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$13.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>20 to 24 steaks</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              Prime-grade strip loin for thick New York strips with strong crust potential and clean
+              steakhouse flavor.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="steakhouse" data-price="11.99" data-weight="18.3" data-featured="4">
+            <p class="cut-type">Steakhouse Value</p>
+            <h3>Choice Strip Loin</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>18.3 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$11.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>24 to 30 steaks</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              Choice strip loin that keeps the steak count high while staying friendlier on budget.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="steakhouse" data-price="14.99" data-weight="18.1" data-featured="5">
+            <p class="cut-type">Signature Cut</p>
+            <h3>Prime Ribeye Roast</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>18.1 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$14.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>20 to 24 steaks</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              Prime boneless ribeye for rich, heavily marbled steaks that feel built for cast iron
+              and live fire.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="steakhouse" data-price="24.19" data-weight="7.2" data-featured="6">
+            <p class="cut-type">Luxury Pour</p>
+            <h3>Whole American Wagyu Tenderloin</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>7.2 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$24.19</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>14 to 18 filets</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              A premium tenderloin option for filet mignon when the group wants to splurge on a true
+              centerpiece cut.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="slow-cook" data-price="6.99" data-weight="25.7" data-featured="7">
+            <p class="cut-type">Versatile Workhorse</p>
+            <h3>Chuck Roll</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>25.7 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$6.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>10 to 12 roasts or 24+ steaks</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              Excellent for chuck roasts, Denver steaks, or chuck eye cuts when you want range and
+              value from one primal.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="pork" data-price="3.99" data-weight="11.8" data-featured="8">
+            <p class="cut-type">Smokehouse Favorite</p>
+            <h3>Skinless Pork Belly</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>11.8 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$3.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>8 to 12 slabs</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              Skinless pork belly for homemade bacon, burnt ends, braises, or anyone chasing richer
+              smokehouse projects.
+            </p>
+          </article>
+
+          <article class="cut-card" data-category="pork" data-price="1.99" data-weight="7.7" data-featured="9">
+            <p class="cut-type">Weeknight Utility</p>
+            <h3>Boneless Pork Loin</h3>
+            <div class="cut-metrics">
+              <div>
+                <span class="metric-label">Estimated Weight</span>
+                <strong>7.7 lb</strong>
+              </div>
+              <div>
+                <span class="metric-label">Price Per Pound</span>
+                <strong>$1.99</strong>
+              </div>
+              <div>
+                <span class="metric-label">Estimated Portions</span>
+                <strong>12 to 16 chops or roasts</strong>
+              </div>
+            </div>
+            <p class="cut-description">
+              A flexible option for pork chops or roasts when the group wants a lighter-priced
+              addition to the board.
+            </p>
+          </article>
+        </div>
+
+        <p class="catalog-note" id="catalog-empty" hidden>
+          No cuts match that filter right now.
+        </p>
+        <p class="catalog-footnote">
+          Estimated portions assume normal trimming and typical steak thickness. Actual yield will
+          vary by pack, trim preference, and final butchering choices.
+        </p>
+      </section>
+
+      <!-- Educational resources -->
+      <section class="section reveal" id="education">
+        <div class="section-heading">
+          <p class="eyebrow">Learn the Cuts</p>
+          <h2>A little homework makes a better buy.</h2>
+          <p>
+            These resources help newer buyers understand primal breakdowns, steak names, and what
+            different cuts are best suited for.
+          </p>
+        </div>
+
+        <div class="resource-grid">
+          <a class="resource-card" href="https://www.beefitswhatsfordinner.com/cuts" target="_blank" rel="noreferrer">
+            <p class="resource-label">Reference Guide</p>
+            <h3>Beef Cuts Chart</h3>
+            <p>
+              A useful overview of major beef cuts and where common steaks, roasts, and subprimals
+              come from.
+            </p>
+          </a>
+          <a class="resource-card" href="https://en.wikipedia.org/wiki/Cut_of_beef" target="_blank" rel="noreferrer">
+            <p class="resource-label">Primer</p>
+            <h3>Cut of Beef</h3>
+            <p>
+              Helpful if you want a straightforward map of primal and subprimal breakdown before
+              reserving anything.
+            </p>
+          </a>
+          <a class="resource-card" href="https://en.wikipedia.org/wiki/Beefsteak" target="_blank" rel="noreferrer">
+            <p class="resource-label">Background</p>
+            <h3>Beefsteak Basics</h3>
+            <p>
+              Good context on steak styles, preparation, and terminology for anyone still learning
+              the board.
+            </p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Disclaimer -->
+      <section class="section reveal" id="disclaimer">
+        <div class="disclaimer-card">
+          <p class="eyebrow">Important Disclaimer</p>
+          <h2>Planning, expectations, and reservation interest only.</h2>
+          <p>
+            No payments are processed on this site. The Steak Syndicate exists to help the group
+            review options, understand likely yields, and reserve interest before any primal is
+            purchased.
+          </p>
+          <p>
+            Final counts, exact pricing, and per-person totals depend on the actual primal weights
+            bought and how each piece butchers out once it is in hand.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>The Steak Syndicate is a static informational site for community planning on GitHub Pages.</p>
+    </footer>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
