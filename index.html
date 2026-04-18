@@ -29,6 +29,7 @@
         <div class="nav-links">
           <a href="#how-it-works">How It Works</a>
           <a href="#cuts">Available Cuts</a>
+          <a href="#request">Request</a>
           <a href="#education">Learn</a>
           <a href="#disclaimer">Disclaimer</a>
         </div>
@@ -48,12 +49,33 @@
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#cuts">Review the Cuts</a>
-              <a class="button button-secondary" href="#how-it-works">How It Works</a>
+              <a class="button button-secondary" href="#request">Request Interest</a>
             </div>
             <div class="hero-meta" aria-label="Hero highlights">
               <span>Informational only</span>
               <span>Offline reservations</span>
-              <span>GitHub Pages static site</span>
+              <span>Twin Cities pickup</span>
+            </div>
+            <div class="local-notice local-notice-hero">
+              <p class="local-notice-label">Twin Cities Only</p>
+              <p>
+                The Steak Syndicate is a local hobby group for friends in the Minneapolis-St. Paul
+                area. Interest requests are for Twin Cities pickup only.
+              </p>
+            </div>
+            <div class="share-block share-block-hero" data-share-block>
+              <p class="share-prompt">
+                Know someone in the Twin Cities who'd want in? Share The Syndicate.
+              </p>
+              <div class="share-actions" aria-label="Share The Steak Syndicate">
+                <button class="share-button" type="button" data-share="copy">Copy Link</button>
+                <a class="share-button" href="#" data-share="sms">Text</a>
+                <a class="share-button" href="#" data-share="email">Email</a>
+                <a class="share-button" href="#" data-share="facebook" target="_blank" rel="noreferrer">
+                  Facebook
+                </a>
+              </div>
+              <p class="share-status" data-share-status aria-live="polite"></p>
             </div>
           </div>
 
@@ -78,7 +100,7 @@
               </article>
               <article class="panel-point">
                 <span class="panel-point-title">How it closes</span>
-                <p>Reservations, final counts, and payment all happen offline once the real primal is in hand.</p>
+                <p>Requests stay local, final counts happen offline, and enough combined interest has to justify the buy.</p>
               </article>
             </div>
             <div class="hero-stats">
@@ -91,8 +113,8 @@
                 <span class="stat-label">catalog filters</span>
               </div>
               <div class="stat-card">
-                <span class="stat-value">0</span>
-                <span class="stat-label">payments processed</span>
+                <span class="stat-value">MSP</span>
+                <span class="stat-label">pickup footprint</span>
               </div>
             </div>
           </aside>
@@ -431,6 +453,124 @@
         </p>
       </section>
 
+      <!-- Request section -->
+      <section class="section reveal" id="request">
+        <div class="section-heading">
+          <p class="eyebrow">Request Interest</p>
+          <h2>Signal demand before anyone buys the primal.</h2>
+          <p>
+            Use this form to draft a clean request summary for the organizer. It keeps the process
+            lightweight while making sure pickup and expectations are clear.
+          </p>
+        </div>
+
+        <div class="request-grid">
+          <div class="request-card">
+            <div class="local-notice">
+              <p class="local-notice-label">Local Pickup Only</p>
+              <p>
+                This hobby group is for friends in Minneapolis-St. Paul and the surrounding Twin
+                Cities area. Requests help estimate demand; they do not guarantee a final order.
+              </p>
+            </div>
+
+            <form class="request-form" id="request-form">
+              <div class="form-grid">
+                <label class="form-field">
+                  <span>Name</span>
+                  <input type="text" name="name" placeholder="Your name" required />
+                </label>
+                <label class="form-field">
+                  <span>Email or mobile</span>
+                  <input type="text" name="contact" placeholder="How the organizer should reach you" required />
+                </label>
+                <label class="form-field form-field-wide">
+                  <span>Cuts you want in on</span>
+                  <input
+                    type="text"
+                    name="cuts"
+                    placeholder="Examples: Prime ribeye roast, prime strip loin, brisket"
+                    required
+                  />
+                </label>
+                <label class="form-field form-field-wide">
+                  <span>Notes on quantity or preferences</span>
+                  <textarea
+                    name="notes"
+                    rows="5"
+                    placeholder="Examples: 2 ribeyes at 1.5 inches, interested if enough people commit, open to sharing a strip loin"
+                  ></textarea>
+                </label>
+              </div>
+
+              <div class="checkbox-stack">
+                <label class="checkbox-row">
+                  <input type="checkbox" name="pickupOnly" required />
+                  <span>I can do local Minneapolis-St. Paul pickup only.</span>
+                </label>
+                <label class="checkbox-row">
+                  <input type="checkbox" name="requestOnly" required />
+                  <span>I understand this is a request, not a guaranteed order.</span>
+                </label>
+              </div>
+
+              <div class="request-actions">
+                <button class="button button-primary" type="submit">Build Request Summary</button>
+                <button class="button button-secondary" type="button" id="copy-request" disabled>
+                  Copy Summary
+                </button>
+              </div>
+            </form>
+
+            <div class="request-output" id="request-output" hidden>
+              <p class="request-output-label">Request Summary</p>
+              <pre id="request-output-text"></pre>
+              <p class="request-output-note">
+                Send this summary to the organizer by text or email. No payment is collected on the
+                site.
+              </p>
+            </div>
+          </div>
+
+          <aside class="request-sidecard">
+            <p class="panel-label">Twin Cities Share</p>
+            <h3>Keep it local, keep it easy to pass along.</h3>
+            <p>
+              If a friend in Minneapolis or St. Paul would want to split a primal, send them the
+              page and let them review the cuts before they reach out.
+            </p>
+            <div class="share-block share-block-side" data-share-block>
+              <p class="share-prompt">
+                Know someone in the Twin Cities who'd want in? Share The Syndicate.
+              </p>
+              <div class="share-actions" aria-label="Share The Steak Syndicate">
+                <button class="share-button" type="button" data-share="copy">Copy Link</button>
+                <a class="share-button" href="#" data-share="sms">Text</a>
+                <a class="share-button" href="#" data-share="email">Email</a>
+                <a class="share-button" href="#" data-share="facebook" target="_blank" rel="noreferrer">
+                  Facebook
+                </a>
+              </div>
+              <p class="share-status" data-share-status aria-live="polite"></p>
+            </div>
+            <div class="request-side-points">
+              <div>
+                <span class="panel-point-title">Local circle</span>
+                <p>Built for friends in the Twin Cities, not broad public fulfillment.</p>
+              </div>
+              <div>
+                <span class="panel-point-title">Demand first</span>
+                <p>Requests help determine whether enough interest exists to justify the purchase.</p>
+              </div>
+              <div>
+                <span class="panel-point-title">Offline finish</span>
+                <p>Pickup, payment, and final cut counts happen after the actual primal is sourced.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
       <!-- Educational resources -->
       <section class="section reveal" id="education">
         <div class="section-heading">
@@ -474,15 +614,16 @@
       <section class="section reveal" id="disclaimer">
         <div class="disclaimer-card">
           <p class="eyebrow">Important Disclaimer</p>
-          <h2>Planning, expectations, and reservation interest only.</h2>
+          <h2>A local hobby group, not a retail butcher storefront.</h2>
           <p>
-            No payments are processed on this site. The Steak Syndicate exists to help the group
-            review options, understand likely yields, and reserve interest before any primal is
+            The Steak Syndicate exists to help friends in the Minneapolis-St. Paul area review
+            options, estimate demand for whole primals, and reserve interest before anything is
             purchased.
           </p>
           <p>
-            Final counts, exact pricing, and per-person totals depend on the actual primal weights
-            bought and how each piece butchers out once it is in hand.
+            No payments are processed on this site. Final fulfillment depends on enough combined
+            interest to justify the purchase, and exact counts and pricing depend on the real primal
+            weights once they are sourced and portioned.
           </p>
         </div>
       </section>
