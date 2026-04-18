@@ -769,6 +769,23 @@ p {
   gap: 1.1rem;
 }
 
+.form-section {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-section-copy {
+  margin-top: 0.35rem;
+  max-width: 38rem;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -791,7 +808,8 @@ p {
 }
 
 .form-field input,
-.form-field textarea {
+.form-field textarea,
+.form-field select {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
@@ -812,10 +830,69 @@ p {
 }
 
 .form-field input:focus,
-.form-field textarea:focus {
+.form-field textarea:focus,
+.form-field select:focus {
   border-color: rgba(224, 181, 122, 0.3);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 0 0 3px rgba(197, 154, 94, 0.08);
+}
+
+.form-field select {
+  appearance: none;
+}
+
+.cut-request-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.cut-request-item {
+  display: grid;
+  gap: 1rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(224, 181, 122, 0.16);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(197, 154, 94, 0.06), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.cut-request-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cut-request-title {
+  color: var(--text);
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.cut-request-remove {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.cut-request-remove:hover,
+.cut-request-remove:focus-visible {
+  color: var(--text);
+}
+
+.cut-request-fields {
+  margin-top: 0;
+}
+
+.button-compact {
+  min-height: 2.9rem;
+  padding: 0.72rem 1rem;
 }
 
 .checkbox-stack {
@@ -1047,6 +1124,12 @@ p {
   .hero-panel-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .form-section-header,
+  .cut-request-topline {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

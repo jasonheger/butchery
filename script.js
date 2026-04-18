@@ -137,12 +137,105 @@ document.addEventListener("DOMContentLoaded", () => {
     const requestOutput = document.getElementById("request-output");
     const requestOutputText = document.getElementById("request-output-text");
     const copyRequestButton = document.getElementById("copy-request");
+    const addCutRequestButton = document.getElementById("add-cut-request");
+    const cutRequestList = document.getElementById("cut-request-list");
+    const cutRequestTemplate = document.getElementById("cut-request-template");
 
-    if (!requestForm || !requestOutput || !requestOutputText || !copyRequestButton) {
+    if (
+      !requestForm ||
+      !requestOutput ||
+      !requestOutputText ||
+      !copyRequestButton ||
+      !addCutRequestButton ||
+      !cutRequestList ||
+      !cutRequestTemplate
+    ) {
       return;
     }
 
+    const thicknessRelevantCuts = new Set([
+      "Prime Ribeye",
+      "Prime Strip Loin",
+      "Choice Strip Loin",
+      "Whole American Wagyu Tenderloin",
+      "Pork Chops",
+      "Boneless Pork Loin"
+    ]);
+
     let latestSummary = "";
+
+    const updateRemoveButtons = () => {
+      const items = cutRequestList.querySelectorAll(".cut-request-item");
+
+      items.forEach((item, index) => {
+        const removeButton = item.querySelector(".cut-request-remove");
+
+        if (!removeButton) {
+          return;
+        }
+
+        removeButton.hidden = items.length === 1;
+        removeButton.textContent = items.length === 1 ? "" : `Remove`;
+
+        const title = item.querySelector(".cut-request-title");
+
+        if (title) {
+          title.textContent = `Cut Request ${index + 1}`;
+        }
+      });
+    };
+
+    const syncThicknessField = (item) => {
+      const cutTypeSelect = item.querySelector(".cut-type-select");
+      const thicknessField = item.querySelector(".thickness-field");
+      const thicknessSelect = thicknessField ? thicknessField.querySelector('select[name="thickness"]') : null;
+
+      if (!cutTypeSelect || !thicknessField || !thicknessSelect) {
+        return;
+      }
+
+      const needsThickness = thicknessRelevantCuts.has(cutTypeSelect.value);
+
+      thicknessField.hidden = !needsThickness;
+      thicknessSelect.required = needsThickness;
+
+      if (!needsThickness) {
+        thicknessSelect.value = "";
+      }
+    };
+
+    const addCutRequestItem = () => {
+      const fragment = cutRequestTemplate.content.cloneNode(true);
+      const item = fragment.querySelector(".cut-request-item");
+
+      if (!item) {
+        return;
+      }
+
+      const removeButton = item.querySelector(".cut-request-remove");
+      const cutTypeSelect = item.querySelector(".cut-type-select");
+
+      if (removeButton) {
+        removeButton.addEventListener("click", () => {
+          item.remove();
+          updateRemoveButtons();
+        });
+      }
+
+      if (cutTypeSelect) {
+        cutTypeSelect.addEventListener("change", () => {
+          syncThicknessField(item);
+        });
+      }
+
+      cutRequestList.appendChild(item);
+      syncThicknessField(item);
+      updateRemoveButtons();
+    };
+
+    addCutRequestButton.addEventListener("click", addCutRequestItem);
+
+    addCutRequestItem();
 
     requestForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -151,20 +244,40 @@ document.addEventListener("DOMContentLoaded", () => {
       const fullName = String(formData.get("fullName") || "").trim();
       const email = String(formData.get("email") || "").trim();
       const phone = String(formData.get("phone") || "").trim() || "Not provided";
-      const desiredCuts = String(formData.get("desiredCuts") || "").trim();
-      const quantity = String(formData.get("quantity") || "").trim();
-      const thickness = String(formData.get("thickness") || "").trim();
-      const flexibility = String(formData.get("flexibility") || "").trim() || "None provided.";
+      const cutRequestItems = Array.from(cutRequestList.querySelectorAll(".cut-request-item"));
+
+      const cutSummaries = cutRequestItems.map((item, index) => {
+        const cutType = String(item.querySelector('[name="cutType"]')?.value || "").trim();
+        const quantity = String(item.querySelector('[name="quantity"]')?.value || "").trim();
+        const quantityUnit = String(item.querySelector('[name="quantityUnit"]')?.value || "").trim();
+        const thickness = String(item.querySelector('[name="thickness"]')?.value || "").trim();
+        const gradePreference = String(item.querySelector('[name="gradePreference"]')?.value || "").trim();
+        const packagingPreference = String(item.querySelector('[name="packagingPreference"]')?.value || "").trim();
+        const flexibilityNotes =
+          String(item.querySelector('[name="flexibilityNotes"]')?.value || "").trim() || "None provided.";
+
+        const lines = [
+          `Cut ${index + 1}: ${cutType}`,
+          `Quantity: ${quantity} ${quantityUnit}`,
+          `Grade preference: ${gradePreference}`,
+          `Packaging preference: ${packagingPreference}`,
+          `Flexibility notes: ${flexibilityNotes}`
+        ];
+
+        if (thicknessRelevantCuts.has(cutType)) {
+          lines.splice(2, 0, `Thickness preference: ${thickness || "No preference"}`);
+        }
+
+        return lines.join("\n");
+      });
 
       latestSummary =
         `Steak Syndicate Request\n\n` +
         `Full name: ${fullName}\n` +
         `Email: ${email}\n` +
         `Phone: ${phone}\n` +
-        `Desired cuts: ${desiredCuts}\n` +
-        `Quantity requested: ${quantity}\n` +
-        `Thickness preference: ${thickness}\n` +
-        `Flexibility notes: ${flexibility}\n` +
+        `\nRequested cuts:\n${cutSummaries.join("\n\n")}\n` +
+        `\n` +
         `Pickup: Minneapolis-St. Paul local pickup only\n` +
         `Acknowledgement: Request only, not a guaranteed order`;
 
