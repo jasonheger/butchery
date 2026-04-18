@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Steak Syndicate | Reserve Interest</title>
+  <meta
+    name="description"
+    content="Reserve interest in a Twin Cities Steak Syndicate primal buy. Request only, no payment collected online."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <!-- Reserve page header -->
+    <header class="hero page-hero">
+      <div class="hero-overlay"></div>
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="index.html">
+          <span class="brand-kicker">Private Club Provisioning</span>
+          <span class="brand-name">The Steak Syndicate</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#cuts">Available Cuts</a>
+          <a href="index.html#recipes">Recipes</a>
+          <a class="is-current" href="reserve.html">Reserve</a>
+          <a href="index.html#disclaimer">Disclaimer</a>
+        </div>
+      </nav>
+
+      <div class="hero-frame">
+        <div class="hero-grid reserve-hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Reserve Interest | Twin Cities Only</p>
+            <h1>Put your name on the board before the primal gets bought.</h1>
+            <p class="hero-intro">
+              This page is for local request intake only. It helps estimate demand for whole primal
+              purchases so the group can decide whether a buy makes sense.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#request-form-section">Start Your Request</a>
+              <a class="button button-secondary" href="index.html#cuts">Back to the Cuts</a>
+            </div>
+            <div class="notice-grid">
+              <div class="local-notice">
+                <p class="local-notice-label">Minneapolis-St. Paul Only</p>
+                <p>
+                  Requests are for friends in the Twin Cities area. Pickup is local only and the
+                  group is not set up for broad shipping or remote fulfillment.
+                </p>
+              </div>
+              <div class="local-notice">
+                <p class="local-notice-label">No Payment Collected Here</p>
+                <p>
+                  This is not checkout. Requests help gauge interest only, and final fulfillment
+                  depends on enough combined demand to justify the purchase.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel reveal">
+            <div class="hero-panel-header">
+              <p class="panel-label">What This Page Does</p>
+              <span class="panel-badge">Request Only</span>
+            </div>
+            <h2>Clear intent first. Real numbers later.</h2>
+            <p class="panel-copy">
+              The goal is to collect serious interest without pretending inventory is already in
+              hand. That keeps the process cleaner for everyone involved.
+            </p>
+            <div class="panel-points">
+              <article class="panel-point">
+                <span class="panel-point-title">What you submit</span>
+                <p>Your preferred cuts, target quantity, thickness, and flexibility notes.</p>
+              </article>
+              <article class="panel-point">
+                <span class="panel-point-title">What it means</span>
+                <p>A request helps estimate demand. It does not guarantee fulfillment or lock pricing.</p>
+              </article>
+              <article class="panel-point">
+                <span class="panel-point-title">What happens after</span>
+                <p>If enough interest exists, the primal is sourced, portioned, and finalized offline.</p>
+              </article>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-card">
+                <span class="stat-value">MSP</span>
+                <span class="stat-label">local footprint</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">0</span>
+                <span class="stat-label">payments collected</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-value">1</span>
+                <span class="stat-label">clean request summary</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Request form -->
+      <section class="section reveal" id="request-form-section">
+        <div class="section-heading">
+          <p class="eyebrow">Request Form</p>
+          <h2>Tell the organizer what you want and how flexible you are.</h2>
+          <p>
+            Keep the request specific enough to be useful but realistic enough to reflect a group
+            buy that still depends on final primal availability and combined interest.
+          </p>
+        </div>
+
+        <div class="request-grid">
+          <div class="request-card">
+            <form class="request-form" id="request-form">
+              <div class="form-grid">
+                <label class="form-field">
+                  <span>Full name</span>
+                  <input type="text" name="fullName" placeholder="Your full name" required />
+                </label>
+                <label class="form-field">
+                  <span>Email</span>
+                  <input type="email" name="email" placeholder="name@example.com" required />
+                </label>
+                <label class="form-field">
+                  <span>Phone</span>
+                  <input type="tel" name="phone" placeholder="Optional" />
+                </label>
+                <label class="form-field">
+                  <span>Quantity requested</span>
+                  <input type="text" name="quantity" placeholder="Example: 2 steaks or 1 shared strip loin" required />
+                </label>
+                <label class="form-field form-field-wide">
+                  <span>Desired cuts</span>
+                  <input
+                    type="text"
+                    name="desiredCuts"
+                    placeholder="Examples: Prime ribeye roast, prime strip loin, brisket"
+                    required
+                  />
+                </label>
+                <label class="form-field">
+                  <span>Thickness preference</span>
+                  <input type="text" name="thickness" placeholder="Example: 1.5 inch steaks" required />
+                </label>
+                <label class="form-field">
+                  <span>Flexibility notes</span>
+                  <input type="text" name="flexibility" placeholder="Example: open to sharing or substituting" />
+                </label>
+              </div>
+
+              <div class="checkbox-stack">
+                <label class="checkbox-row">
+                  <input type="checkbox" name="requestOnly" required />
+                  <span>I understand this is a request only, not a guaranteed order.</span>
+                </label>
+                <label class="checkbox-row">
+                  <input type="checkbox" name="pickupOnly" required />
+                  <span>I understand this is for local Minneapolis-St. Paul pickup only.</span>
+                </label>
+              </div>
+
+              <div class="request-actions">
+                <button class="button button-primary" type="submit">Build Request Summary</button>
+                <button class="button button-secondary" type="button" id="copy-request" disabled>
+                  Copy Summary
+                </button>
+              </div>
+            </form>
+
+            <div class="request-output" id="request-output" hidden>
+              <p class="request-output-label">Request Summary</p>
+              <pre id="request-output-text"></pre>
+              <p class="request-output-note">
+                Send this summary to the organizer by text or email. No payment is collected on the
+                site.
+              </p>
+            </div>
+          </div>
+
+          <aside class="request-sidecard">
+            <p class="panel-label">Twin Cities Share</p>
+            <h3>If someone local should be in on the buy, send them here.</h3>
+            <p>
+              The cleaner the interest picture is, the easier it is to decide whether bringing in a
+              primal is worth it.
+            </p>
+            <div class="share-block" data-share-block>
+              <p class="share-prompt">
+                Know someone in the Twin Cities who'd want in? Share The Syndicate.
+              </p>
+              <div class="share-actions" aria-label="Share The Steak Syndicate">
+                <button class="share-button" type="button" data-share="copy">Copy Link</button>
+                <a class="share-button" href="#" data-share="sms">Text</a>
+                <a class="share-button" href="#" data-share="email">Email</a>
+                <a class="share-button" href="#" data-share="facebook" target="_blank" rel="noreferrer">
+                  Facebook
+                </a>
+              </div>
+              <p class="share-status" data-share-status aria-live="polite"></p>
+            </div>
+            <div class="request-side-points">
+              <div>
+                <span class="panel-point-title">Local hobby group</span>
+                <p>This is a community buy among friends, not a retail butcher operation.</p>
+              </div>
+              <div>
+                <span class="panel-point-title">Demand estimate</span>
+                <p>Requests help determine whether enough combined demand exists to source the primal.</p>
+              </div>
+              <div>
+                <span class="panel-point-title">Offline finish</span>
+                <p>Final cut counts, pickup coordination, and payment happen only after the buy is real.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- What happens next -->
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">What Happens Next</p>
+          <h2>The request is the signal, not the final transaction.</h2>
+          <p>
+            Once the organizer has enough information, the group can decide whether the purchase is
+            worth making and how the primal should be divided.
+          </p>
+        </div>
+
+        <div class="process-grid next-steps-grid">
+          <article class="process-card">
+            <span class="step-number">01</span>
+            <h3>Requests are reviewed</h3>
+            <p>
+              The organizer looks at which cuts people want, how much overlap exists, and whether
+              there is enough interest to move forward.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step-number">02</span>
+            <h3>The primal is sourced</h3>
+            <p>
+              If demand is strong enough, the group buys the actual primal based on available pack
+              weights and market pricing at that time.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step-number">03</span>
+            <h3>Cuts and counts are finalized</h3>
+            <p>
+              Exact steaks, roast sizes, and totals are confirmed only after trimming and portioning
+              the real product in hand.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step-number">04</span>
+            <h3>Pickup happens locally</h3>
+            <p>
+              The group settles up offline and coordinates a Minneapolis-St. Paul area pickup once
+              the order is ready.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>The Steak Syndicate is a static informational site for Twin Cities community planning on GitHub Pages.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

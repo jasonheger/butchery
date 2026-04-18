@@ -22,15 +22,16 @@
     <header class="hero" id="top">
       <div class="hero-overlay"></div>
       <nav class="topbar" aria-label="Primary">
-        <a class="brand" href="#top">
+        <a class="brand" href="index.html">
           <span class="brand-kicker">Private Club Provisioning</span>
           <span class="brand-name">The Steak Syndicate</span>
         </a>
         <div class="nav-links">
+          <a class="is-current" href="index.html">Home</a>
           <a href="#how-it-works">How It Works</a>
           <a href="#cuts">Available Cuts</a>
-          <a href="#request">Request</a>
-          <a href="#education">Learn</a>
+          <a href="#recipes">Recipes</a>
+          <a href="reserve.html">Reserve</a>
           <a href="#disclaimer">Disclaimer</a>
         </div>
       </nav>
@@ -49,7 +50,7 @@
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#cuts">Review the Cuts</a>
-              <a class="button button-secondary" href="#request">Request Interest</a>
+              <a class="button button-secondary" href="reserve.html">Request Interest</a>
             </div>
             <div class="hero-meta" aria-label="Hero highlights">
               <span>Informational only</span>
@@ -453,136 +454,52 @@
         </p>
       </section>
 
-      <!-- Request section -->
-      <section class="section reveal" id="request">
-        <div class="section-heading">
-          <p class="eyebrow">Request Interest</p>
-          <h2>Signal demand before anyone buys the primal.</h2>
-          <p>
-            Use this form to draft a clean request summary for the organizer. It keeps the process
-            lightweight while making sure pickup and expectations are clear.
-          </p>
-        </div>
-
-        <div class="request-grid">
-          <div class="request-card">
-            <div class="local-notice">
-              <p class="local-notice-label">Local Pickup Only</p>
-              <p>
-                This hobby group is for friends in Minneapolis-St. Paul and the surrounding Twin
-                Cities area. Requests help estimate demand; they do not guarantee a final order.
-              </p>
-            </div>
-
-            <form class="request-form" id="request-form">
-              <div class="form-grid">
-                <label class="form-field">
-                  <span>Name</span>
-                  <input type="text" name="name" placeholder="Your name" required />
-                </label>
-                <label class="form-field">
-                  <span>Email or mobile</span>
-                  <input type="text" name="contact" placeholder="How the organizer should reach you" required />
-                </label>
-                <label class="form-field form-field-wide">
-                  <span>Cuts you want in on</span>
-                  <input
-                    type="text"
-                    name="cuts"
-                    placeholder="Examples: Prime ribeye roast, prime strip loin, brisket"
-                    required
-                  />
-                </label>
-                <label class="form-field form-field-wide">
-                  <span>Notes on quantity or preferences</span>
-                  <textarea
-                    name="notes"
-                    rows="5"
-                    placeholder="Examples: 2 ribeyes at 1.5 inches, interested if enough people commit, open to sharing a strip loin"
-                  ></textarea>
-                </label>
-              </div>
-
-              <div class="checkbox-stack">
-                <label class="checkbox-row">
-                  <input type="checkbox" name="pickupOnly" required />
-                  <span>I can do local Minneapolis-St. Paul pickup only.</span>
-                </label>
-                <label class="checkbox-row">
-                  <input type="checkbox" name="requestOnly" required />
-                  <span>I understand this is a request, not a guaranteed order.</span>
-                </label>
-              </div>
-
-              <div class="request-actions">
-                <button class="button button-primary" type="submit">Build Request Summary</button>
-                <button class="button button-secondary" type="button" id="copy-request" disabled>
-                  Copy Summary
-                </button>
-              </div>
-            </form>
-
-            <div class="request-output" id="request-output" hidden>
-              <p class="request-output-label">Request Summary</p>
-              <pre id="request-output-text"></pre>
-              <p class="request-output-note">
-                Send this summary to the organizer by text or email. No payment is collected on the
-                site.
-              </p>
-            </div>
-          </div>
-
-          <aside class="request-sidecard">
-            <p class="panel-label">Twin Cities Share</p>
-            <h3>Keep it local, keep it easy to pass along.</h3>
+      <!-- Reserve preview -->
+      <section class="section reveal">
+        <div class="reserve-preview">
+          <div class="reserve-preview-copy">
+            <p class="eyebrow">Reserve</p>
+            <h2>When you are ready to raise your hand, the request page handles the rest.</h2>
             <p>
-              If a friend in Minneapolis or St. Paul would want to split a primal, send them the
-              page and let them review the cuts before they reach out.
+              The dedicated reserve page explains how requests work, keeps the Twin Cities-only
+              pickup notice visible, and lets you draft a clean request summary for the organizer.
             </p>
-            <div class="share-block share-block-side" data-share-block>
-              <p class="share-prompt">
-                Know someone in the Twin Cities who'd want in? Share The Syndicate.
-              </p>
-              <div class="share-actions" aria-label="Share The Steak Syndicate">
-                <button class="share-button" type="button" data-share="copy">Copy Link</button>
-                <a class="share-button" href="#" data-share="sms">Text</a>
-                <a class="share-button" href="#" data-share="email">Email</a>
-                <a class="share-button" href="#" data-share="facebook" target="_blank" rel="noreferrer">
-                  Facebook
-                </a>
-              </div>
-              <p class="share-status" data-share-status aria-live="polite"></p>
-            </div>
-            <div class="request-side-points">
-              <div>
-                <span class="panel-point-title">Local circle</span>
-                <p>Built for friends in the Twin Cities, not broad public fulfillment.</p>
-              </div>
-              <div>
-                <span class="panel-point-title">Demand first</span>
-                <p>Requests help determine whether enough interest exists to justify the purchase.</p>
-              </div>
-              <div>
-                <span class="panel-point-title">Offline finish</span>
-                <p>Pickup, payment, and final cut counts happen after the actual primal is sourced.</p>
-              </div>
-            </div>
-          </aside>
+          </div>
+          <div class="reserve-preview-actions">
+            <a class="button button-primary" href="reserve.html">Go to Reserve Page</a>
+            <a class="button button-secondary" href="#recipes">Browse Recipes</a>
+          </div>
         </div>
       </section>
 
-      <!-- Educational resources -->
-      <section class="section reveal" id="education">
+      <!-- Recipes and learning -->
+      <section class="section reveal" id="recipes">
         <div class="section-heading">
-          <p class="eyebrow">Learn the Cuts</p>
-          <h2>A little homework makes a better buy.</h2>
+          <p class="eyebrow">Recipes and Learning</p>
+          <h2>Ideas for what ends up on the board, in the pan, or over the fire.</h2>
           <p>
-            These resources help newer buyers understand primal breakdowns, steak names, and what
-            different cuts are best suited for.
+            A few recipe-forward starting points plus a couple fundamentals for anyone still
+            learning the cuts and how whole primals break down.
           </p>
         </div>
 
         <div class="resource-grid">
+          <a class="resource-card" href="https://www.seriouseats.com/reverse-seared-steak-recipe" target="_blank" rel="noreferrer">
+            <p class="resource-label">Steak Method</p>
+            <h3>Reverse-Seared Ribeye</h3>
+            <p>
+              A strong reference for thick-cut steaks when you want a precise interior and a hard
+              finishing crust.
+            </p>
+          </a>
+          <a class="resource-card" href="https://www.seriouseats.com/texas-barbecue-smoked-brisket-recipe" target="_blank" rel="noreferrer">
+            <p class="resource-label">Low and Slow</p>
+            <h3>Smoked Brisket Guide</h3>
+            <p>
+              Useful for anyone looking at whole brisket and wanting a clearer picture of the cook
+              ahead.
+            </p>
+          </a>
           <a class="resource-card" href="https://www.beefitswhatsfordinner.com/cuts" target="_blank" rel="noreferrer">
             <p class="resource-label">Reference Guide</p>
             <h3>Beef Cuts Chart</h3>
@@ -593,18 +510,10 @@
           </a>
           <a class="resource-card" href="https://en.wikipedia.org/wiki/Cut_of_beef" target="_blank" rel="noreferrer">
             <p class="resource-label">Primer</p>
-            <h3>Cut of Beef</h3>
+            <h3>Primal Breakdown Basics</h3>
             <p>
-              Helpful if you want a straightforward map of primal and subprimal breakdown before
-              reserving anything.
-            </p>
-          </a>
-          <a class="resource-card" href="https://en.wikipedia.org/wiki/Beefsteak" target="_blank" rel="noreferrer">
-            <p class="resource-label">Background</p>
-            <h3>Beefsteak Basics</h3>
-            <p>
-              Good context on steak styles, preparation, and terminology for anyone still learning
-              the board.
+              Helpful if you want a quick map of how primals and subprimals relate before putting in
+              a request.
             </p>
           </a>
         </div>
