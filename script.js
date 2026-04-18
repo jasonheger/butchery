@@ -148,17 +148,23 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
 
       const formData = new FormData(requestForm);
-      const name = String(formData.get("name") || "").trim();
-      const contact = String(formData.get("contact") || "").trim();
-      const cuts = String(formData.get("cuts") || "").trim();
-      const notes = String(formData.get("notes") || "").trim() || "None provided.";
+      const fullName = String(formData.get("fullName") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const phone = String(formData.get("phone") || "").trim() || "Not provided";
+      const desiredCuts = String(formData.get("desiredCuts") || "").trim();
+      const quantity = String(formData.get("quantity") || "").trim();
+      const thickness = String(formData.get("thickness") || "").trim();
+      const flexibility = String(formData.get("flexibility") || "").trim() || "None provided.";
 
       latestSummary =
         `Steak Syndicate Request\n\n` +
-        `Name: ${name}\n` +
-        `Contact: ${contact}\n` +
-        `Requested cuts: ${cuts}\n` +
-        `Notes: ${notes}\n` +
+        `Full name: ${fullName}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone}\n` +
+        `Desired cuts: ${desiredCuts}\n` +
+        `Quantity requested: ${quantity}\n` +
+        `Thickness preference: ${thickness}\n` +
+        `Flexibility notes: ${flexibility}\n` +
         `Pickup: Minneapolis-St. Paul local pickup only\n` +
         `Acknowledgement: Request only, not a guaranteed order`;
 
