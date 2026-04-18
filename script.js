@@ -13,7 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const taglineElement = document.getElementById("hero-tagline");
 
   if (taglineElement) {
-    const randomIndex = Math.floor(Math.random() * taglines.length);
+    let randomIndex = Math.floor(Math.random() * taglines.length);
+
+    try {
+      const previousIndex = Number(window.localStorage.getItem("lastTaglineIndex"));
+
+      if (taglines.length > 1 && Number.isInteger(previousIndex) && previousIndex === randomIndex) {
+        randomIndex = (randomIndex + 1 + Math.floor(Math.random() * (taglines.length - 1))) % taglines.length;
+      }
+
+      window.localStorage.setItem("lastTaglineIndex", String(randomIndex));
+    } catch (error) {
+      // Ignore storage failures and keep the random tagline.
+    }
+
     taglineElement.textContent = taglines[randomIndex];
     taglineElement.classList.add("is-ready");
   }
