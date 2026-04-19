@@ -36,10 +36,13 @@
       </nav>
 
       <div class="hero-frame">
-        <div class="hero-grid reserve-hero-grid">
+          <div class="hero-grid reserve-hero-grid">
           <div class="hero-copy reveal">
             <p class="eyebrow">Reserve Interest | Twin Cities Only</p>
             <h1>Put your name on the board before the primal gets bought.</h1>
+            <p class="hero-tagline" data-rotating-tagline aria-live="polite">
+              Where prime steaks meet bourbon and fire.
+            </p>
             <p class="hero-intro">
               This page is for local request intake only. It helps estimate demand for whole primal
               purchases so the group can decide whether a buy makes sense.
@@ -100,8 +103,8 @@
                 <span class="stat-label">payments collected</span>
               </div>
               <div class="stat-card">
-                <span class="stat-value">1</span>
-                <span class="stat-label">clean request summary</span>
+                <span class="stat-value">JSON</span>
+                <span class="stat-label">live submission payload</span>
               </div>
             </div>
           </aside>
@@ -254,6 +257,14 @@
                             <option value="Flexible anywhere in Twin Cities">Flexible anywhere in Twin Cities</option>
                           </select>
                         </label>
+                        <label class="form-field form-field-wide">
+                          <span>General notes</span>
+                          <textarea
+                            name="generalNotes"
+                            rows="4"
+                            placeholder="Anything the organizer should know about timing, substitutions, or how flexible you are across the whole request"
+                          ></textarea>
+                        </label>
                       </div>
                     </div>
 
@@ -268,7 +279,11 @@
                       </label>
                       <label class="checkbox-row">
                         <input type="checkbox" name="noPayment" required />
-                        <span>I understand no payment is collected on site and final fulfillment depends on enough combined interest.</span>
+                        <span>I understand no payment is collected on site.</span>
+                      </label>
+                      <label class="checkbox-row">
+                        <input type="checkbox" name="groupDemand" required />
+                        <span>I understand final fulfillment depends on enough combined demand to justify the primal purchase.</span>
                       </label>
                     </div>
 
@@ -276,23 +291,25 @@
                       <button class="button button-secondary" type="button" id="back-to-review">
                         Back to Review
                       </button>
-                      <button class="button button-primary" type="submit">
-                        Prepare Request
+                      <button class="button button-primary" type="submit" id="submit-request">
+                        Submit Request
                       </button>
                       <button class="button button-secondary" type="button" id="copy-request" disabled>
-                        Copy Request
+                        Copy JSON
                       </button>
                     </div>
                   </form>
 
                   <div class="request-output" id="request-output" hidden>
-                    <p class="request-output-label">Structured Request Ready</p>
+                    <p class="request-output-label">Structured Request Payload</p>
                     <pre id="request-output-text"></pre>
                     <p class="request-output-note">
-                      This payload is structured for a future JSON post to a backend endpoint such
-                      as Google Apps Script. For now, it is prepared client-side only.
+                      This payload is sent as JSON to the live request endpoint and remains available
+                      here for review or copy.
                     </p>
                   </div>
+
+                  <div class="submission-feedback" id="submission-feedback" hidden></div>
                 </div>
 
                 <aside class="request-sidecard">
