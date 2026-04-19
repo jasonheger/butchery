@@ -45,7 +45,7 @@
               purchases so the group can decide whether a buy makes sense.
             </p>
             <div class="hero-actions">
-              <a class="button button-primary" href="#request-form-section">Start Your Request</a>
+              <a class="button button-primary" href="#request-builder">Start Your Request</a>
               <a class="button button-secondary" href="index.html#cuts">Back to the Cuts</a>
             </div>
             <div class="notice-grid">
@@ -79,7 +79,7 @@
             <div class="panel-points">
               <article class="panel-point">
                 <span class="panel-point-title">What you submit</span>
-                <p>Your preferred cuts, target quantity, thickness, and flexibility notes.</p>
+                <p>Your contact details once, then one or more requested cuts with quantity, packaging, and flexibility notes.</p>
               </article>
               <article class="panel-point">
                 <span class="panel-point-title">What it means</span>
@@ -110,121 +110,218 @@
     </header>
 
     <main>
-      <!-- Request form -->
-      <section class="section reveal" id="request-form-section">
+      <!-- Request builder -->
+      <section class="section reveal" id="request-builder">
         <div class="section-heading">
-          <p class="eyebrow">Request Form</p>
-          <h2>Tell the organizer what you want and how flexible you are.</h2>
+          <p class="eyebrow">Request Builder</p>
+          <h2>Build your board first, then review it before you send anything.</h2>
           <p>
-            Keep the request specific enough to be useful but realistic enough to reflect a group
-            buy that still depends on final primal availability and combined interest.
+            This flow is structured like a premium order builder, but it remains a request
+            experience only. No payment is collected here, and nothing is guaranteed until enough
+            combined interest justifies the primal purchase.
           </p>
         </div>
 
-        <div class="request-grid">
-          <div class="request-card">
-            <form class="request-form" id="request-form">
-              <div class="form-grid">
-                <label class="form-field">
-                  <span>Full name</span>
-                  <input type="text" name="fullName" placeholder="Your full name" required />
-                </label>
-                <label class="form-field">
-                  <span>Email</span>
-                  <input type="email" name="email" placeholder="name@example.com" required />
-                </label>
-                <label class="form-field">
-                  <span>Phone</span>
-                  <input type="tel" name="phone" placeholder="Optional" />
-                </label>
-                <label class="form-field">
-                  <span>Quantity requested</span>
-                  <input type="text" name="quantity" placeholder="Example: 2 steaks or 1 shared strip loin" required />
-                </label>
-                <label class="form-field form-field-wide">
-                  <span>Desired cuts</span>
-                  <input
-                    type="text"
-                    name="desiredCuts"
-                    placeholder="Examples: Prime ribeye roast, prime strip loin, brisket"
-                    required
-                  />
-                </label>
-                <label class="form-field">
-                  <span>Thickness preference</span>
-                  <input type="text" name="thickness" placeholder="Example: 1.5 inch steaks" required />
-                </label>
-                <label class="form-field">
-                  <span>Flexibility notes</span>
-                  <input type="text" name="flexibility" placeholder="Example: open to sharing or substituting" />
-                </label>
+        <div class="builder-shell" id="request-builder-shell">
+          <div class="builder-steps" aria-label="Request steps">
+            <button class="builder-step is-active" type="button" data-step-nav="1">
+              <span class="builder-step-number">01</span>
+              <span class="builder-step-copy">
+                <strong>Your Board</strong>
+                <span>Browse cuts and add them to the request.</span>
+              </span>
+            </button>
+            <button class="builder-step" type="button" data-step-nav="2">
+              <span class="builder-step-number">02</span>
+              <span class="builder-step-copy">
+                <strong>Review Your Request</strong>
+                <span>Set quantities, thickness, grade, packaging, and notes.</span>
+              </span>
+            </button>
+            <button class="builder-step" type="button" data-step-nav="3">
+              <span class="builder-step-number">03</span>
+              <span class="builder-step-copy">
+                <strong>Contact and Pickup</strong>
+                <span>Finish with contact details and acknowledgements.</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="builder-stage">
+            <section class="builder-panel is-active" data-step-panel="1">
+              <div class="builder-panel-heading">
+                <p class="request-output-label">Step 1 | Your Board</p>
+                <h3>Start with the cuts that should be on your board.</h3>
+                <p>
+                  Add every cut you want considered. You can mix steakhouse cuts, barbecue cuts,
+                  and pork in the same request.
+                </p>
               </div>
 
-              <div class="checkbox-stack">
-                <label class="checkbox-row">
-                  <input type="checkbox" name="requestOnly" required />
-                  <span>I understand this is a request only, not a guaranteed order.</span>
-                </label>
-                <label class="checkbox-row">
-                  <input type="checkbox" name="pickupOnly" required />
-                  <span>I understand this is for local Minneapolis-St. Paul pickup only.</span>
-                </label>
+              <div class="builder-layout">
+                <div class="board-catalog" id="board-catalog"></div>
+
+                <aside class="board-sidebar">
+                  <p class="panel-label">Your Board</p>
+                  <h3>What you have added so far.</h3>
+                  <p>
+                    Add items here first, then move into review to dial in quantity, grade,
+                    packaging, and any substitutions you would accept.
+                  </p>
+                  <div class="board-summary-list" id="board-summary-list"></div>
+                  <p class="board-empty" id="board-empty">Nothing on the board yet.</p>
+                  <div class="board-sidebar-notes">
+                    <div class="local-notice">
+                      <p class="local-notice-label">Twin Cities Only</p>
+                      <p>Pickup is local Minneapolis-St. Paul only. This is not a shipping flow.</p>
+                    </div>
+                    <div class="local-notice">
+                      <p class="local-notice-label">Request Only</p>
+                      <p>No payment is collected here, and final fulfillment depends on enough combined interest.</p>
+                    </div>
+                  </div>
+                  <div class="request-actions">
+                    <button class="button button-primary" type="button" id="continue-to-review" disabled>
+                      Review Your Request
+                    </button>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section class="builder-panel" data-step-panel="2" hidden>
+              <div class="builder-panel-heading">
+                <p class="request-output-label">Step 2 | Review Your Request</p>
+                <h3>Refine each cut before you send the request forward.</h3>
+                <p>
+                  This is where the board becomes specific enough to be useful for a future primal
+                  purchase decision.
+                </p>
+              </div>
+
+              <div class="review-shell">
+                <div class="review-list" id="review-list"></div>
+                <p class="board-empty" id="review-empty" hidden>Your board is empty. Go back and add cuts first.</p>
               </div>
 
               <div class="request-actions">
-                <button class="button button-primary" type="submit">Build Request Summary</button>
-                <button class="button button-secondary" type="button" id="copy-request" disabled>
-                  Copy Summary
+                <button class="button button-secondary" type="button" id="back-to-board">
+                  Back to Board
+                </button>
+                <button class="button button-primary" type="button" id="continue-to-contact">
+                  Continue to Contact
                 </button>
               </div>
-            </form>
+            </section>
 
-            <div class="request-output" id="request-output" hidden>
-              <p class="request-output-label">Request Summary</p>
-              <pre id="request-output-text"></pre>
-              <p class="request-output-note">
-                Send this summary to the organizer by text or email. No payment is collected on the
-                site.
-              </p>
-            </div>
+            <section class="builder-panel" data-step-panel="3" hidden>
+              <div class="builder-panel-heading">
+                <p class="request-output-label">Step 3 | Contact and Pickup</p>
+                <h3>Finish the request with contact details and local pickup confirmation.</h3>
+                <p>
+                  The submission below prepares a structured request payload for a future backend,
+                  while staying fully static-site compatible today.
+                </p>
+              </div>
+
+              <div class="request-grid builder-contact-grid">
+                <div class="request-card">
+                  <form class="request-form" id="request-form">
+                    <div class="form-section">
+                      <p class="request-output-label">Contact</p>
+                      <div class="form-grid">
+                        <label class="form-field">
+                          <span>Full name</span>
+                          <input type="text" name="fullName" placeholder="Your full name" required />
+                        </label>
+                        <label class="form-field">
+                          <span>Email</span>
+                          <input type="email" name="email" placeholder="name@example.com" required />
+                        </label>
+                        <label class="form-field">
+                          <span>Phone</span>
+                          <input type="tel" name="phone" placeholder="Optional" />
+                        </label>
+                        <label class="form-field">
+                          <span>Pickup area</span>
+                          <select name="pickupArea" required>
+                            <option value="">Select pickup area</option>
+                            <option value="Minneapolis">Minneapolis</option>
+                            <option value="St. Paul">St. Paul</option>
+                            <option value="South Metro">South Metro</option>
+                            <option value="West Metro">West Metro</option>
+                            <option value="North Metro">North Metro</option>
+                            <option value="Flexible anywhere in Twin Cities">Flexible anywhere in Twin Cities</option>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="checkbox-stack">
+                      <label class="checkbox-row">
+                        <input type="checkbox" name="requestOnly" required />
+                        <span>I understand this is a request only, not a guaranteed order.</span>
+                      </label>
+                      <label class="checkbox-row">
+                        <input type="checkbox" name="pickupOnly" required />
+                        <span>I understand this is for local Minneapolis-St. Paul pickup only.</span>
+                      </label>
+                      <label class="checkbox-row">
+                        <input type="checkbox" name="noPayment" required />
+                        <span>I understand no payment is collected on site and final fulfillment depends on enough combined interest.</span>
+                      </label>
+                    </div>
+
+                    <div class="request-actions">
+                      <button class="button button-secondary" type="button" id="back-to-review">
+                        Back to Review
+                      </button>
+                      <button class="button button-primary" type="submit">
+                        Prepare Request
+                      </button>
+                      <button class="button button-secondary" type="button" id="copy-request" disabled>
+                        Copy Request
+                      </button>
+                    </div>
+                  </form>
+
+                  <div class="request-output" id="request-output" hidden>
+                    <p class="request-output-label">Structured Request Ready</p>
+                    <pre id="request-output-text"></pre>
+                    <p class="request-output-note">
+                      This payload is structured for a future JSON post to a backend endpoint such
+                      as Google Apps Script. For now, it is prepared client-side only.
+                    </p>
+                  </div>
+                </div>
+
+                <aside class="request-sidecard">
+                  <p class="panel-label">Request Notes</p>
+                  <h3>Still local. Still request-only. Just much cleaner.</h3>
+                  <p>
+                    This experience is built to feel deliberate and polished without pretending it
+                    is ecommerce checkout.
+                  </p>
+                  <div class="request-side-points">
+                    <div>
+                      <span class="panel-point-title">Local pickup only</span>
+                      <p>The request is limited to Minneapolis-St. Paul area pickup among friends.</p>
+                    </div>
+                    <div>
+                      <span class="panel-point-title">No payment on site</span>
+                      <p>The site does not collect payment, take deposits, or guarantee inventory.</p>
+                    </div>
+                    <div>
+                      <span class="panel-point-title">Primal demand first</span>
+                      <p>Final fulfillment depends on enough combined interest to justify buying and portioning the primal.</p>
+                    </div>
+                  </div>
+                  <div class="review-snapshot" id="review-snapshot"></div>
+                </aside>
+              </div>
+            </section>
           </div>
-
-          <aside class="request-sidecard">
-            <p class="panel-label">Twin Cities Share</p>
-            <h3>If someone local should be in on the buy, send them here.</h3>
-            <p>
-              The cleaner the interest picture is, the easier it is to decide whether bringing in a
-              primal is worth it.
-            </p>
-            <div class="share-block" data-share-block>
-              <p class="share-prompt">
-                Know someone in the Twin Cities who'd want in? Share The Syndicate.
-              </p>
-              <div class="share-actions" aria-label="Share The Steak Syndicate">
-                <button class="share-button" type="button" data-share="copy">Copy Link</button>
-                <a class="share-button" href="#" data-share="sms">Text</a>
-                <a class="share-button" href="#" data-share="email">Email</a>
-                <a class="share-button" href="#" data-share="facebook" target="_blank" rel="noreferrer">
-                  Facebook
-                </a>
-              </div>
-              <p class="share-status" data-share-status aria-live="polite"></p>
-            </div>
-            <div class="request-side-points">
-              <div>
-                <span class="panel-point-title">Local hobby group</span>
-                <p>This is a community buy among friends, not a retail butcher operation.</p>
-              </div>
-              <div>
-                <span class="panel-point-title">Demand estimate</span>
-                <p>Requests help determine whether enough combined demand exists to source the primal.</p>
-              </div>
-              <div>
-                <span class="panel-point-title">Offline finish</span>
-                <p>Final cut counts, pickup coordination, and payment happen only after the buy is real.</p>
-              </div>
-            </div>
-          </aside>
+          <p class="builder-status" id="builder-status" aria-live="polite"></p>
         </div>
       </section>
 
