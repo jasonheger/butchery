@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "Steak on the board. Bourbon in the glass."
     ];
 
-    const taglineElements = document.querySelectorAll("[data-rotating-tagline], #hero-tagline");
+    const taglineElements = document.querySelectorAll("[data-rotating-tagline]");
 
     if (taglineElements.length === 0) {
       return;
@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
         id: makeId(),
         cutKey: cut.key,
         cutName: cut.name,
-        quantity: "2",
+        quantity: "1",
         quantityUnit: cut.defaultUnit,
         thicknessPreference: cut.thicknessRelevant ? "No preference" : "",
         gradePreference: "No strong preference",
@@ -571,9 +571,21 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      const existingItem = state.items.find((item) => item.cutKey === cutKey);
+
+      if (existingItem) {
+        const currentIndex = quantityOptions.indexOf(existingItem.quantity);
+        const nextIndex = currentIndex >= 0 ? Math.min(currentIndex + 1, quantityOptions.length - 1) : 0;
+
+        existingItem.quantity = quantityOptions[nextIndex] || existingItem.quantity;
+        syncUi();
+        setStatus(`${cut.name} is already on your board. Quantity increased to ${existingItem.quantity}.`);
+        return;
+      }
+
       state.items.push(createDefaultItem(cut));
       syncUi();
-      setStatus(`${cut.name} added to your board.`, "success");
+      setStatus(`${cut.name} added to your board.`);
     };
 
     const removeItem = (itemId) => {
@@ -751,10 +763,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(payload)
       })
         .then(async (response) => {
+          const rawResponse = await response.text();
           let responseBody = null;
 
           try {
-            responseBody = await response.json();
+            responseBody = rawResponse ? JSON.parse(rawResponse) : null;
           } catch (error) {
             responseBody = null;
           }
@@ -763,8 +776,20 @@ document.addEventListener("DOMContentLoaded", () => {
             throw new Error(responseBody?.message || `Request failed with status ${response.status}.`);
           }
 
+          if (responseBody && typeof responseBody === "object") {
+            const explicitFailure =
+              responseBody.ok === false ||
+              responseBody.success === false ||
+              responseBody.status === "error";
+
+            if (explicitFailure) {
+              throw new Error(
+                responseBody.message || "The request endpoint returned an error. Please try again."
+              );
+            }
+          }
+
           resetBuilder();
-          setSubmissionState("success", "Request submitted. The board has been cleared for the next request.");
           setStatus("Request submitted successfully. Your board is clear for a new request.", "success");
         })
         .catch((error) => {
