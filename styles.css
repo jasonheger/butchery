@@ -346,7 +346,9 @@ p {
 }
 
 .reserve-hero-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.88fr);
+  grid-template-columns: minmax(0, 0.94fr) minmax(360px, 0.98fr);
+  gap: 1.55rem;
+  align-items: center;
 }
 
 .legal-hero-grid {
@@ -359,6 +361,32 @@ p {
   gap: 1rem;
   max-width: 38rem;
   padding: 0.2rem 0;
+}
+
+.reserve-page-hero .hero-frame {
+  padding: 2.25rem 2.45rem;
+}
+
+.reserve-hero-copy {
+  max-width: 34.5rem;
+  gap: 1.1rem;
+  padding-left: clamp(0.2rem, 1vw, 0.85rem);
+}
+
+.reserve-page-hero .hero-copy h1 {
+  font-size: clamp(2.2rem, 3vw, 3.15rem);
+  max-width: 12.6ch;
+  line-height: 1.04;
+}
+
+.reserve-page-hero .hero-intro {
+  max-width: 31rem;
+  font-size: 1rem;
+  line-height: 1.76;
+}
+
+.reserve-page-hero .hero-panel {
+  padding: 1.42rem 1.46rem;
 }
 
 .hero-intro {
@@ -941,7 +969,7 @@ p {
 .builder-panel {
   display: none;
   gap: 1.4rem;
-  padding: 1.7rem;
+  padding: 1.85rem;
   border: 1px solid rgba(224, 181, 122, 0.2);
   border-radius: 24px;
   background:
@@ -1515,6 +1543,15 @@ option:hover {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .reserve-hero-copy {
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .reserve-page-hero .hero-frame {
+    padding: 1.75rem;
+  }
 }
 
 @media (max-width: 700px) {
@@ -1552,6 +1589,11 @@ option:hover {
   .brand-tagline {
     font-size: 0.9rem;
     max-width: 100%;
+  }
+
+  .reserve-page-hero .hero-copy h1 {
+    font-size: clamp(2.15rem, 8vw, 2.8rem);
+    max-width: 12.5ch;
   }
 
   .summary,
