@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const initRequestBuilder = () => {
     const endpointUrl =
-      "https://script.google.com/macros/s/AKfycbz2Y7dVHoHwBSE2DUVzX_yIBHfzr1-LIAFgMMIV0DZFfpvDUe0uHzNCUph02JSG-0pX/exec";
+      "https://script.google.com/macros/s/AKfycbxqBdeXH14152rDrPlg-V2mka1Ns0-OoR4ioZiCuFqfkCfTzYhRNHkIODdbTIUYQ9yt/exec";
     const builderShell = document.getElementById("request-builder-shell");
     const boardCatalog = document.getElementById("board-catalog");
     const boardSummaryList = document.getElementById("board-summary-list");
