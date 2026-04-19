@@ -578,6 +578,19 @@ p {
   color: var(--text-muted);
 }
 
+.builder-status {
+  min-height: 1.4rem;
+  font-size: 0.95rem;
+}
+
+.builder-status.is-success {
+  color: var(--accent-strong);
+}
+
+.builder-status.is-error {
+  color: #e0b1a0;
+}
+
 .board-sidebar-notes {
   display: grid;
   gap: 0.8rem;
@@ -676,6 +689,14 @@ p {
 .button:hover,
 .button:focus-visible {
   transform: translateY(-2px);
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
 }
 
 .button-primary {
@@ -1202,6 +1223,41 @@ p {
 .request-output-note {
   color: var(--text-muted);
   font-size: 0.94rem;
+}
+
+.submission-feedback {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-soft);
+}
+
+.submission-feedback.is-loading {
+  border-color: rgba(224, 181, 122, 0.18);
+  color: var(--text);
+}
+
+.submission-feedback.is-success {
+  border-color: rgba(224, 181, 122, 0.28);
+  background:
+    linear-gradient(180deg, rgba(197, 154, 94, 0.08), transparent 70%),
+    rgba(255, 255, 255, 0.03);
+  color: var(--text);
+}
+
+.submission-feedback.is-error {
+  border-color: rgba(224, 177, 160, 0.24);
+  background:
+    linear-gradient(180deg, rgba(148, 73, 54, 0.12), transparent 70%),
+    rgba(255, 255, 255, 0.03);
+  color: #f2d7cc;
+}
+
+.checkbox-row-inline {
+  align-items: center;
 }
 
 .request-sidecard {
