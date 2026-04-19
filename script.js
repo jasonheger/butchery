@@ -1,6 +1,8 @@
 // Premium static interactions for The Steak Syndicate.
 
 document.addEventListener("DOMContentLoaded", () => {
+  const NORTH_METRO_PICKUP = "North Metro, Minneapolis-St. Paul";
+
   const copyText = async (text) => {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
@@ -149,9 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const backToBoardButton = document.getElementById("back-to-board");
     const backToReviewButton = document.getElementById("back-to-review");
     const requestForm = document.getElementById("request-form");
-    const requestOutput = document.getElementById("request-output");
-    const requestOutputText = document.getElementById("request-output-text");
-    const copyRequestButton = document.getElementById("copy-request");
     const submitRequestButton = document.getElementById("submit-request");
     const submissionFeedback = document.getElementById("submission-feedback");
     const builderStatus = document.getElementById("builder-status");
@@ -169,9 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
       !backToBoardButton ||
       !backToReviewButton ||
       !requestForm ||
-      !requestOutput ||
-      !requestOutputText ||
-      !copyRequestButton ||
       !submitRequestButton ||
       !submissionFeedback ||
       !builderStatus
@@ -295,17 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const state = {
       currentStep: 1,
       items: [],
-      preparedPayload: null,
       isSubmitting: false
-    };
-
-    const resetPreparedPayload = () => {
-      state.preparedPayload = null;
-      requestOutput.hidden = true;
-      copyRequestButton.disabled = true;
-      submissionFeedback.hidden = true;
-      submissionFeedback.className = "submission-feedback";
-      submissionFeedback.textContent = "";
     };
 
     const setStatus = (message = "", type = "") => {
@@ -313,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
       builderStatus.className = type ? `builder-status is-${type}` : "builder-status";
     };
 
-    const setSubmissionState = (type, message) => {
+    const setSubmissionState = (type = "", message = "") => {
       if (!message) {
         submissionFeedback.hidden = true;
         submissionFeedback.className = "submission-feedback";
@@ -324,6 +310,11 @@ document.addEventListener("DOMContentLoaded", () => {
       submissionFeedback.hidden = false;
       submissionFeedback.className = `submission-feedback is-${type}`;
       submissionFeedback.textContent = message;
+    };
+
+    const clearTransientFeedback = () => {
+      setSubmissionState();
+      setStatus("");
     };
 
     const makeId = () => `item-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
@@ -390,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span>${cut.price}</span>
               </div>
               <p>${cut.description}</p>
-              <button class="button button-secondary button-compact add-to-request" type="button" data-cut-key="${cut.key}">
+              <button class="button button-secondary button-compact" type="button" data-cut-key="${cut.key}">
                 Add to Request
               </button>
             </article>
@@ -490,8 +481,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   <span>I am willing to split this primal with someone else if that helps the buy come together.</span>
                 </label>
                 <label class="form-field form-field-wide">
-                  <span>Item notes</span>
-                  <textarea data-item-id="${item.id}" data-field="itemNotes" rows="3" placeholder="Examples: open to thicker cuts, want a cleaner trim, interested only if prime is available">${item.itemNotes}</textarea>
+                  <span>Flexibility notes</span>
+                  <textarea data-item-id="${item.id}" data-field="itemNotes" rows="3" placeholder="Examples: open to thicker cuts, prefer prime if possible, cleaner trim preferred">${item.itemNotes}</textarea>
                 </label>
               </div>
             </article>
@@ -525,8 +516,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     };
 
+    const syncDerivedUi = () => {
+      renderBoardSummary();
+      renderSnapshot();
+      continueToContactButton.disabled = !isReviewComplete();
+      submitRequestButton.disabled = state.isSubmitting;
+    };
+
     const syncUi = () => {
-      resetPreparedPayload();
       renderBoardSummary();
       renderReview();
       renderSnapshot();
@@ -546,7 +543,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       state.currentStep = step;
-      setStatus("");
+
+      if (!builderStatus.classList.contains("is-success")) {
+        setStatus("");
+      }
 
       const panels = builderShell.querySelectorAll("[data-step-panel]");
       const steps = builderShell.querySelectorAll("[data-step-nav]");
@@ -571,6 +571,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      clearTransientFeedback();
+
       const existingItem = state.items.find((item) => item.cutKey === cutKey);
 
       if (existingItem) {
@@ -589,6 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const removeItem = (itemId) => {
+      clearTransientFeedback();
       state.items = state.items.filter((item) => item.id !== itemId);
       syncUi();
 
@@ -609,9 +612,9 @@ document.addEventListener("DOMContentLoaded", () => {
           full_name: String(formData.get("fullName") || "").trim(),
           email: String(formData.get("email") || "").trim(),
           phone: String(formData.get("phone") || "").trim(),
-          pickup_area: String(formData.get("pickupArea") || "").trim()
+          pickup_area: String(formData.get("pickupArea") || NORTH_METRO_PICKUP).trim()
         },
-        acknowledgements: {
+        acknowledgments: {
           request_only: Boolean(formData.get("requestOnly")),
           no_payment_collected: Boolean(formData.get("noPayment")),
           local_pickup_only: Boolean(formData.get("pickupOnly")),
@@ -619,10 +622,11 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         items: state.items.map((item) => {
           const cut = getCutByKey(item.cutKey);
+          const parsedQuantity = Number.parseInt(item.quantity, 10);
 
           return {
             cut_type: item.cutName,
-            quantity: Number.parseInt(item.quantity, 10) || 0,
+            quantity: Number.isNaN(parsedQuantity) ? 10 : parsedQuantity,
             quantity_unit: item.quantityUnit,
             thickness_preference: cut?.thicknessRelevant ? item.thicknessPreference : "",
             grade_preference: item.gradePreference,
@@ -638,7 +642,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const resetBuilder = () => {
       state.items = [];
-      state.preparedPayload = null;
       state.isSubmitting = false;
       requestForm.reset();
       syncUi();
@@ -693,13 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
       removeItem(removeButton.getAttribute("data-remove-id") || "");
     });
 
-    reviewList.addEventListener("input", (event) => {
-      const target = event.target;
-
-      if (!(target instanceof HTMLElement)) {
-        return;
-      }
-
+    const syncReviewField = (target) => {
       const field = target.getAttribute("data-field");
       const itemId = target.getAttribute("data-item-id");
 
@@ -713,13 +710,35 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      clearTransientFeedback();
+
       if (target instanceof HTMLInputElement && target.type === "checkbox") {
         item[field] = target.checked;
       } else {
         item[field] = "value" in target ? target.value : "";
       }
 
-      syncUi();
+      syncDerivedUi();
+    };
+
+    reviewList.addEventListener("change", (event) => {
+      const target = event.target;
+
+      if (!(target instanceof HTMLElement)) {
+        return;
+      }
+
+      syncReviewField(target);
+    });
+
+    reviewList.addEventListener("input", (event) => {
+      const target = event.target;
+
+      if (!(target instanceof HTMLTextAreaElement)) {
+        return;
+      }
+
+      syncReviewField(target);
     });
 
     builderShell.querySelectorAll("[data-step-nav]").forEach((button) => {
@@ -736,24 +755,31 @@ document.addEventListener("DOMContentLoaded", () => {
     requestForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      if (!isReviewComplete() || state.isSubmitting) {
+      if (state.isSubmitting) {
+        return;
+      }
+
+      if (!hasBoardItems()) {
+        setStep(1);
+        return;
+      }
+
+      if (!isReviewComplete()) {
         setStep(2);
+        return;
+      }
+
+      if (!requestForm.reportValidity()) {
         return;
       }
 
       state.isSubmitting = true;
       submitRequestButton.textContent = "Submitting Request...";
       submitRequestButton.disabled = true;
-      copyRequestButton.disabled = true;
       setSubmissionState("loading", "Submitting your request to the syndicate board...");
       setStatus("");
 
       const payload = buildPayload();
-      state.preparedPayload = payload;
-      window.requestPayloadPreview = payload;
-      requestOutputText.textContent = JSON.stringify(payload, null, 2);
-      requestOutput.hidden = false;
-      copyRequestButton.disabled = false;
 
       fetch(endpointUrl, {
         method: "POST",
@@ -790,20 +816,23 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           resetBuilder();
+          setSubmissionState(
+            "success",
+            "Request submitted. Your board has been cleared, and the request has been sent for review."
+          );
           setStatus("Request submitted successfully. Your board is clear for a new request.", "success");
         })
         .catch((error) => {
           state.isSubmitting = false;
           submitRequestButton.textContent = "Submit Request";
           submitRequestButton.disabled = false;
-          copyRequestButton.disabled = false;
           setSubmissionState(
             "error",
             error instanceof Error
               ? error.message
               : "Submission failed. Please try again."
           );
-          setStatus("Submission failed. Review the payload and try again.", "error");
+          setStatus("Submission failed. Please review the request and try again.", "error");
         })
         .finally(() => {
           state.isSubmitting = false;
@@ -812,28 +841,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    requestForm.addEventListener("input", () => {
-      resetPreparedPayload();
-    });
-
-    copyRequestButton.addEventListener("click", async () => {
-      if (!state.preparedPayload) {
-        return;
-      }
-
-      const originalLabel = copyRequestButton.textContent;
-
-      try {
-        await copyText(JSON.stringify(state.preparedPayload, null, 2));
-        copyRequestButton.textContent = "Request Copied";
-      } catch (error) {
-        copyRequestButton.textContent = "Copy Failed";
-      }
-
-      window.setTimeout(() => {
-        copyRequestButton.textContent = originalLabel;
-      }, 1600);
-    });
+    requestForm.addEventListener("input", clearTransientFeedback);
+    requestForm.addEventListener("change", clearTransientFeedback);
 
     renderCatalog();
     syncUi();
