@@ -1,8 +1,6 @@
 // Premium static interactions for The Steak Syndicate.
 
 document.addEventListener("DOMContentLoaded", () => {
-  const NORTH_METRO_PICKUP = "North Metro, Minneapolis-St. Paul";
-
   const copyText = async (text) => {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
@@ -138,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const initRequestBuilder = () => {
     const endpointUrl =
-      "https://script.google.com/macros/s/AKfycbxhc_baEqtZ8Q2_lX3f049yvQi3jwXXQ0T01iXpMFkGcZQM76JyNSCcvPLhZ30SVhSl/exec";
+      "https://script.google.com/macros/s/AKfycbz2Y7dVHoHwBSE2DUVzX_yIBHfzr1-LIAFgMMIV0DZFfpvDUe0uHzNCUph02JSG-0pX/exec";
     const builderShell = document.getElementById("request-builder-shell");
     const boardCatalog = document.getElementById("board-catalog");
     const boardSummaryList = document.getElementById("board-summary-list");
@@ -210,15 +208,15 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultUnit: "steaks"
       },
       {
-        key: "wagyu-tenderloin",
-        name: "Whole American Wagyu Tenderloin",
+        key: "wagyu-filet",
+        name: "American Wagyu Filet Mignon",
         category: "Luxury Pour",
         weight: "7.2 lb avg",
         price: "$24.19/lb est",
-        description: "A premium centerpiece cut for filet-heavy requests and smaller luxury group buys.",
+        description: "A premium filet option for smaller luxury requests when the board calls for a finer cut.",
         thicknessRelevant: true,
-        units: ["steaks", "whole piece", "shared portion"],
-        defaultUnit: "steaks"
+        units: ["filets", "shared portion"],
+        defaultUnit: "filets"
       },
       {
         key: "whole-prime-brisket",
@@ -278,9 +276,14 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const quantityOptions = ["1", "2", "3", "4", "5", "6", "8", "10+"];
-    const thicknessOptions = ["No preference", "1 inch", "1.25 inches", "1.5 inches", "1.75 inches", "2 inches"];
+    const thicknessOptions = [
+      "No preference",
+      "Thin - 0.5 inch",
+      "Standard - 1 inch",
+      "Thick - 1.25 inch"
+    ];
     const gradeOptions = ["No strong preference", "Prime", "Choice", "American Wagyu", "Best available fit"];
-    const packagingOptions = ["Individually packed", "Packed in pairs", "Keep whole if possible", "Organizer discretion"];
+    const packagingOptions = ["Individually packed", "Packed in pairs", "Organizer discretion"];
     const substitutionOptions = [
       "No substitutions",
       "Same family only",
@@ -612,7 +615,7 @@ document.addEventListener("DOMContentLoaded", () => {
           full_name: String(formData.get("fullName") || "").trim(),
           email: String(formData.get("email") || "").trim(),
           phone: String(formData.get("phone") || "").trim(),
-          pickup_area: String(formData.get("pickupArea") || NORTH_METRO_PICKUP).trim()
+          pickup_area: "North Metro"
         },
         acknowledgments: {
           request_only: Boolean(formData.get("requestOnly")),
@@ -780,41 +783,41 @@ document.addEventListener("DOMContentLoaded", () => {
       setStatus("");
 
       const payload = buildPayload();
+      console.info("[Steak Syndicate] Submitting request", {
+        endpoint: endpointUrl,
+        requestId: payload.request_id,
+        itemCount: payload.items.length
+      });
 
       fetch(endpointUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
         body: JSON.stringify(payload)
       })
         .then(async (response) => {
-          const rawResponse = await response.text();
-          let responseBody = null;
+          const text = await response.text();
+          console.info("[Steak Syndicate] Request endpoint responded", {
+            status: response.status,
+            ok: response.ok,
+            bodyPreview: text.slice(0, 240)
+          });
 
           try {
-            responseBody = rawResponse ? JSON.parse(rawResponse) : null;
-          } catch (error) {
-            responseBody = null;
+            return JSON.parse(text);
+          } catch {
+            throw new Error(text || "Unexpected response from request endpoint.");
+          }
+        })
+        .then((data) => {
+          const explicitFailure =
+            data?.ok === false ||
+            data?.success === false ||
+            data?.status === "error";
+
+          if (explicitFailure) {
+            throw new Error(data?.message || "The request endpoint returned an error.");
           }
 
-          if (!response.ok) {
-            throw new Error(responseBody?.message || `Request failed with status ${response.status}.`);
-          }
-
-          if (responseBody && typeof responseBody === "object") {
-            const explicitFailure =
-              responseBody.ok === false ||
-              responseBody.success === false ||
-              responseBody.status === "error";
-
-            if (explicitFailure) {
-              throw new Error(
-                responseBody.message || "The request endpoint returned an error. Please try again."
-              );
-            }
-          }
-
+          console.info("[Steak Syndicate] Request submitted successfully", data);
           resetBuilder();
           setSubmissionState(
             "success",
@@ -826,13 +829,15 @@ document.addEventListener("DOMContentLoaded", () => {
           state.isSubmitting = false;
           submitRequestButton.textContent = "Submit Request";
           submitRequestButton.disabled = false;
+          console.error("[Steak Syndicate] Request submission failed", {
+            error,
+            payload
+          });
           setSubmissionState(
             "error",
-            error instanceof Error
-              ? error.message
-              : "Submission failed. Please try again."
+            "Unable to send the request right now. Please try again in a moment."
           );
-          setStatus("Submission failed. Please review the request and try again.", "error");
+          setStatus("Submission failed. Your board is still here, so you can try again.", "error");
         })
         .finally(() => {
           state.isSubmitting = false;

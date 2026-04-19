@@ -134,10 +134,11 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(2.8rem, 4.35vw, 4.15rem);
-  max-width: 11.2ch;
+  font-size: clamp(2.72rem, 4.1vw, 4rem);
+  max-width: 12ch;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  line-height: 1.01;
 }
 
 h2 {
@@ -232,7 +233,7 @@ p {
 
 .brand-name {
   font-family: "Cormorant Garamond", serif;
-  font-size: 2.08rem;
+  font-size: 2.18rem;
   font-weight: 700;
   line-height: 0.93;
   color: var(--text);
@@ -240,7 +241,7 @@ p {
 
 .brand-tagline {
   color: var(--text-soft);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.38;
   max-width: 30ch;
@@ -362,8 +363,8 @@ p {
 
 .hero-intro {
   max-width: 33rem;
-  font-size: 1.05rem;
-  line-height: 1.72;
+  font-size: 1.04rem;
+  line-height: 1.74;
 }
 
 .hero-actions {
@@ -962,7 +963,7 @@ p {
 
 .builder-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.95fr);
+  grid-template-columns: minmax(0, 1.68fr) minmax(315px, 0.9fr);
   gap: 1.15rem;
   align-items: start;
 }
@@ -1025,7 +1026,7 @@ p {
   position: sticky;
   top: 6rem;
   background:
-    radial-gradient(circle at top, rgba(197, 154, 94, 0.08), transparent 30%),
+    radial-gradient(circle at top, rgba(197, 154, 94, 0.1), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 46%),
     rgba(20, 16, 13, 0.94);
 }
@@ -1225,6 +1226,7 @@ p {
   border-radius: 16px;
   background-color: #1b1512;
   color: var(--text);
+  color-scheme: dark;
   font: inherit;
   padding: 0.95rem 1rem;
   outline: none;
