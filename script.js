@@ -176,102 +176,94 @@ document.addEventListener("DOMContentLoaded", () => {
     const cutCatalog = [
       {
         key: "prime-ribeye",
-        name: "Prime Ribeye",
-        category: "Steakhouse Favorite",
+        name: "Ribeye Steaks",
+        category: "Premium Steaks",
         weight: "18.1 lb avg",
         price: "$14.99/lb est",
-        description: "Rich, heavily marbled ribeye built for cast iron, open fire, and serious steak nights.",
+        portions: "12 to 16 steaks",
+        description: "Rich, generously marbled steaks with the kind of deep beef flavor people expect from a steakhouse order.",
+        sourceNote: "Cut from prime boneless ribeye.",
         thicknessRelevant: true,
-        units: ["steaks", "shared portion", "whole piece"],
+        units: ["steaks", "packs", "shared portion"],
         defaultUnit: "steaks"
       },
       {
         key: "prime-strip-loin",
-        name: "Prime Strip Loin",
-        category: "Steakhouse Favorite",
+        name: "New York Strip Steaks",
+        category: "Premium Steaks",
         weight: "14.8 lb avg",
         price: "$13.99/lb est",
-        description: "Prime strip loin for thick New York strips with clean steakhouse structure and great crust.",
+        portions: "14 to 18 steaks",
+        description: "A steakhouse classic with a firm bite, bold beef flavor, and the clean edge people want from a strip steak.",
+        sourceNote: "Cut from strip loin.",
         thicknessRelevant: true,
-        units: ["steaks", "shared portion", "whole piece"],
-        defaultUnit: "steaks"
-      },
-      {
-        key: "choice-strip-loin",
-        name: "Choice Strip Loin",
-        category: "Steakhouse Value",
-        weight: "18.3 lb avg",
-        price: "$11.99/lb est",
-        description: "A more budget-friendly strip loin option when the group wants volume without losing the format.",
-        thicknessRelevant: true,
-        units: ["steaks", "shared portion", "whole piece"],
+        units: ["steaks", "packs", "shared portion"],
         defaultUnit: "steaks"
       },
       {
         key: "wagyu-filet",
-        name: "American Wagyu Filet Mignon",
-        category: "Luxury Pour",
+        name: "Filet Mignon",
+        category: "Special Occasion",
         weight: "7.2 lb avg",
         price: "$24.19/lb est",
-        description: "A premium filet option for smaller luxury requests when the board calls for a finer cut.",
+        portions: "14 to 18 filets",
+        description: "Tender, smaller-format steaks for the people who want a softer bite and a more refined plate.",
+        sourceNote: "Cut from American Wagyu tenderloin.",
         thicknessRelevant: true,
-        units: ["filets", "shared portion"],
+        units: ["filets", "packs", "shared portion"],
         defaultUnit: "filets"
       },
       {
-        key: "whole-prime-brisket",
-        name: "Whole Prime Brisket",
-        category: "Low and Slow",
-        weight: "23.4 lb avg",
-        price: "$5.99/lb est",
-        description: "Prime brisket for smoking or braising when the request is built around a long cook.",
+        key: "prime-rib-roast",
+        name: "Prime Rib Roast",
+        category: "Signature Roast",
+        weight: "18.1 lb avg",
+        price: "$14.99/lb est",
+        portions: "8 to 12 portions",
+        description: "A classic center-of-the-table roast with rich marbling and enough presence for a serious dinner.",
+        sourceNote: "Prepared from prime boneless ribeye.",
         thicknessRelevant: false,
-        units: ["whole piece", "shared portion"],
-        defaultUnit: "whole piece"
-      },
-      {
-        key: "whole-choice-brisket",
-        name: "Whole Choice Brisket",
-        category: "Barbecue Staple",
-        weight: "14.3 lb avg",
-        price: "$5.89/lb est",
-        description: "A value-minded brisket request that still makes sense for serious barbecue plans.",
-        thicknessRelevant: false,
-        units: ["whole piece", "shared portion"],
-        defaultUnit: "whole piece"
-      },
-      {
-        key: "chuck-roll",
-        name: "Chuck Roll",
-        category: "Versatile Workhorse",
-        weight: "25.7 lb avg",
-        price: "$6.99/lb est",
-        description: "A flexible cut for roast-heavy or steak-heavy breakdowns depending on how the group wants it portioned.",
-        thicknessRelevant: false,
-        units: ["roasts", "shared portion", "whole piece"],
+        units: ["roasts", "shared portion"],
         defaultUnit: "roasts"
       },
       {
-        key: "pork-belly",
-        name: "Pork Belly",
-        category: "Smokehouse Favorite",
-        weight: "11.8 lb avg",
-        price: "$3.99/lb est",
-        description: "Built for bacon, slabs, braises, and richer smokehouse projects.",
+        key: "chuck-roll",
+        name: "Chuck Roast",
+        category: "Practical Roast",
+        weight: "25.7 lb avg",
+        price: "$6.99/lb est",
+        portions: "6 to 8 roasts",
+        description: "A dependable braise-and-slow-roast option that keeps the board grounded with something useful and comforting.",
+        sourceNote: "Cut from chuck roll.",
         thicknessRelevant: false,
-        units: ["slabs", "shared portion", "whole piece"],
-        defaultUnit: "slabs"
+        units: ["roasts", "shared portion"],
+        defaultUnit: "roasts"
       },
       {
         key: "pork-chops",
         name: "Pork Chops",
-        category: "Weeknight Utility",
+        category: "Pork Favorite",
         weight: "7.7 lb avg",
         price: "$1.99/lb est",
-        description: "A chop-forward pork request when the group wants an easy, flexible add-on to the board.",
+        portions: "12 to 16 chops",
+        description: "Easy to portion, quick to cook, and a clean way to add a lighter-priced favorite to the request.",
+        sourceNote: "Cut from boneless pork loin.",
         thicknessRelevant: true,
         units: ["chops", "packs", "shared portion"],
         defaultUnit: "chops"
+      },
+      {
+        key: "pork-loin-roast",
+        name: "Pork Loin Roast",
+        category: "Pork Roast",
+        weight: "7.7 lb avg",
+        price: "$1.99/lb est",
+        portions: "2 to 3 roasts",
+        description: "A practical family-style roast that stays approachable on price while still feeling like a real dinner plan.",
+        sourceNote: "Prepared from boneless pork loin.",
+        thicknessRelevant: false,
+        units: ["roasts", "shared portion"],
+        defaultUnit: "roasts"
       }
     ];
 
@@ -382,8 +374,10 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="board-card-meta">
                 <span>${cut.weight}</span>
                 <span>${cut.price}</span>
+                <span>${cut.portions}</span>
               </div>
               <p>${cut.description}</p>
+              <p class="cut-source-note">${cut.sourceNote}</p>
               <button class="button button-secondary button-compact" type="button" data-cut-key="${cut.key}">
                 Add to Request
               </button>
@@ -445,6 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="cut-request-remove" type="button" data-remove-id="${item.id}">Remove</button>
               </div>
               <p class="review-card-copy">${cut?.description || ""}</p>
+              <p class="cut-source-note">${cut?.sourceNote || ""}</p>
               <div class="form-grid review-card-grid">
                 <label class="form-field">
                   <span>Quantity</span>
@@ -481,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <input type="checkbox" data-item-id="${item.id}" data-field="splitPrimalWillingness" ${
                     item.splitPrimalWillingness ? "checked" : ""
                   } />
-                  <span>I am willing to split this primal with someone else if that helps the buy come together.</span>
+                  <span>I am willing to share the larger source cut with someone else if that helps the buy come together.</span>
                 </label>
                 <label class="form-field form-field-wide">
                   <span>Flexibility notes</span>
