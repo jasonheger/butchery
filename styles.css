@@ -740,6 +740,17 @@ p {
   color: var(--accent-strong);
 }
 
+.cut-description,
+.review-card-copy {
+  max-width: 48rem;
+}
+
+.cut-source-note {
+  margin-top: -0.25rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
 .cut-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1182,10 +1193,6 @@ p {
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-}
-
-.review-card-copy {
-  max-width: 48rem;
 }
 
 .review-card-grid {
